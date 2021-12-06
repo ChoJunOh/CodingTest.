@@ -1,0 +1,25 @@
+from collections import defaultdict
+
+def solution(genres, plays):
+    answer = []
+    genre_count = defaultdict(lambda: 0)
+    music = defaultdict(lambda: [])
+
+    i = 0
+    for genre, play in zip(genres, plays):
+        genre_count[genre] += play
+        music[genre].append((i, play))
+        i += 1
+
+    genre_count = sorted(genre_count.items(), key = lambda x: x[1], reverse = True)
+
+    for g in genre_count:
+
+        sorted_g = sorted(music[g[0]], key = lambda x: x[1], reverse = True)
+
+        answer.append(sorted_g[0][0])
+
+        if len(sorted_g) > 1:
+            answer.append(sorted_g[1][0])
+            
+    return answer
