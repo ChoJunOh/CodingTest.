@@ -1,0 +1,36 @@
+import math
+
+def solution(progresses, speeds):
+    answer = []
+    
+    remain_day_list = []
+    
+    for i in range(len(progresses)):
+        remain_progress = 100 - progresses[i]
+        remain_day = remain_progress / speeds[i]
+        remain_day_list.append(math.ceil(remain_day))
+        
+    for i in range(1,len(remain_day_list)):
+        if remain_day_list[i-1] > remain_day_list[i]:
+            remain_day_list[i] = remain_day_list[i-1]
+    
+    count = 1
+    for i in range(1,len(remain_day_list)):
+        if remain_day_list[i-1] >= remain_day_list[i]:
+            count += 1
+        else:
+            answer.append(count)
+            count = 1
+    
+    answer.append(count)
+        
+    return answer
+    
+    
+    #
+    1. 남은 일자를 계산.
+    2. 남은 일자를 하나의 배열로 생성. 
+    3. 만약 앞에 프로세스보다 남은 일자가 적은 경우, 앞에 있는 일자와 동일하게 초기화. 
+    4. 동일한 날짜의 개수를 카운트. 
+    5. 만약 다른 날짜가 나오는 경우 해당 카운트를 반환 리스트에 삽입. 
+    6. for 문이 종료 후, 남은 카운트를 추가해주고 반환해주어 문제를 풀이.
