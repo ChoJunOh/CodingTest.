@@ -1,0 +1,28 @@
+from collections import deque
+
+def solution(prices):
+    answer = []
+    prices = deque(prices)
+    
+    while prices:
+        sec = 0
+        p = prices.popleft()
+        
+        for price in prices:
+            sec += 1
+            if price < p:
+                break 
+                
+        answer.append(sec)
+        
+    return answer
+    -------------------------------------------
+    1. 주식가격을 순회한다.
+
+2. 주식의 첫번째 요소를 꺼낸다.
+
+3. 주식목록의 나머지 요소를 순회하면서 걸리는 시간에 1초를 더한다.
+
+4. 현재 주식가격보다 낮은 주식가격을 만나면 루프를 종료한다.
+
+5. 구해진 시간을 정답에 추가한다.
