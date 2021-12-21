@@ -1,0 +1,47 @@
+def solution(answers):
+    answer = []
+
+    first = [1,2,3,4,5]
+    second = [2,1,2,3,2,4,2,5]
+    third = [3,3,1,1,2,2,4,4,5,5]
+    
+    first_c = 0
+    second_c = 0
+    third_c = 0
+    
+
+    for number in range(len(answers)):
+        if answers[number] == first[number%5]:
+            first_c += 1
+        if answers[number] == second[number%8]:
+            second_c += 1
+        if answers[number] == third[number%10]:
+            third_c += 1
+    pre_answer = [first_c,second_c,third_c]    
+
+    for person, score in enumerate(pre_answer):
+        if score == max(pre_answer):
+            answer.append(person+1)
+    return answer
+    
+    -------------------------------------------------------
+이건 코드 문제보다는 패턴을 알고 하는게 중요하다. 그리고 그 패턴을 코드로 나타낼 수 있어야 한다.
+
+사실 그냥 코드도 중요한 것 같다.
+
+
+1번 수포자 답의 패턴은 1~5까지 반복
+
+1번 수포자의 n번째 문제 정답 : (문제번호)%5
+
+ 
+
+2번 수포자 답의 패턴은 1,3,4,5순이며 각각 앞에 2를 써주기
+
+2번 수포자의 n번째 문제 정답 : (문제 번호)%8 나오는 수
+
+ 
+
+3번 수포자 답의 패턴은 3,3,1,1,2,2,4,4,5,5 반복
+
+3번 수포자의 n번째 문제 정답 : (문제 번호)%10 나오는 수
