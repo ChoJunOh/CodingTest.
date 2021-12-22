@@ -1,0 +1,30 @@
+import math
+import itertools
+
+def is_decimal(n):
+    if n < 2: return False
+
+    to = int(math.sqrt(n)) + 1
+    for i in range(2, to):
+        if n % i == 0: return False
+    return True
+
+def solution(number):
+    candidate = set()
+
+    for i in range(len(number)):
+        numbers = set(map(int, map(''.join, itertools.permutations(number, i+1))))
+        candidate |= numbers
+
+    answer = 0
+    candidate = list(candidate)
+    for n in candidate:
+        if is_decimal(n):
+            answer += 1
+    return answer
+    
+    ----------------------------------------
+    
+    파이썬은 하기 편하다. itertools를 이용하면 순열을 쓰기 쉽기 때문.
+    
+    순열을 이용하면 permutation, 조합을 이용하면 combinations를 쓰면 된다.
