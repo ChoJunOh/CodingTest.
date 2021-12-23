@@ -1,0 +1,21 @@
+import math
+
+def solution(brown, yellow):
+    
+    total = brown + yellow
+
+    yellow_comb = []
+    for i in range(1, int(math.sqrt(yellow)) + 1):
+        yellow_comb.append((yellow // i, i))
+
+    yellow_comb.sort(key=lambda x: x[1], reverse=True)
+
+    for width, height in yellow_comb:
+        if (width + 2) * (height + 2) == total:
+            return [width + 2, height + 2]
+            
+------------------------------------------------------------------
+
+1.
+2.
+3.
