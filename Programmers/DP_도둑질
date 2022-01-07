@@ -1,0 +1,43 @@
+def solution(money):
+    table = [0 for _ in range(len(money))]
+    
+    table[0] = money[0]
+    table[1] = table[0]
+    
+    for i in range(2, len(money)-1):
+        table[i] = max(table[i-1], table[i-2] + money[i])
+        
+    value = max(table)
+    
+    table = [0 for _ in range(len(money))]
+    
+    table[1] = money[1]
+    
+    for i in range(2, len(money)):
+        table[i] = max(table[i-1], table[i-2] + money[i])
+        
+    return max(value, max(table))
+    
+---------------------------------------------------------
+
+table[i]를 i번째 집까지 털었을 때 최댓값(도둑이 제일 부자가 되었을 때)이라고 하면
+
+첫 번째. i-1번째 집을 이미 털었을 경우에는 i번째 집은 못 턴다. 즉 그냥 table[i-1]이라는 뜻.
+ 
+두 번째. i-1번째 집을 안 털었을 경우, table[i-2]+money[i]
+
+이렇게 두 가지이다.
+
+여기서 우리는 중학교때 우리를 즐겁게 해줬던 점화식을 세울 수 있다. 너무 즐겁다.
+
+table[i] = max(table[i-1], table[i-2]+money[i])이다.
+
+Q. 않이;;; 첫 번째 집을 털었는지 안 털었는지도 모르는데 그렇게 점화식을 세우나여?
+
+털지 안 털지 모르니까 점화식을 세웠죠. 이 SAE...나라의 어른이님.
+
+만약에 첫 번째 집을 털었다면 table[0] = money[0]이 되고, 맨 마지막 집은 털지 못 하는거고
+
+첫 번째 집을 털지 않았다면 table[0]=0, table[1]=money[1]이 된다.
+
+즉 최댓값 여부에 따라 맨 마지막 집은 털 수도 아닐 수도 있습니다.(절대 정치인 안X수 따라한 거 아니다. ㄹㅇ)
